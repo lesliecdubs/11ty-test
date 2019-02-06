@@ -1,9 +1,10 @@
 ---
-subtitle: Collections
+subtitle: Collections Test
 excerpt: Group, reuse, and sort content in interesting ways.
 tags:
   - docs-templates
 ---
+
 # Collections (using Tags)
 
 While [pagination](/docs/pagination/) allows you do iterate over a data set to create multiple templates, a collection allows you to group content in interesting ways. A piece of content can be a part of multiple collections, merely by assigning the same string value to the `tags` key in the front matter.
@@ -22,6 +23,7 @@ title: Hot Take—Social Media is Considered Harmful
 This will place this `mypost.md` into the `post` collection with all other pieces of content sharing the `post` tag. To reference this collection and make a list of all posts, use the `collections` object in any template (this example is using Nunjucks syntax):
 
 {% raw %}
+
 ```
 <ul>
 {%- for post in collections.post -%}
@@ -29,6 +31,7 @@ This will place this `mypost.md` into the `post` collection with all other piece
 {%- endfor -%}
 </ul>
 ```
+
 {% endraw %}
 
 ### Example: Navigation Links with an `active` class added for on the current page
@@ -36,6 +39,7 @@ This will place this `mypost.md` into the `post` collection with all other piece
 Compare the `post.url` and special Eleventy-provided `page.url` variable to find the current page. Building on the previous example:
 
 {% raw %}
+
 ```
 <ul>
 {%- for post in collections.post -%}
@@ -43,6 +47,7 @@ Compare the `post.url` and special Eleventy-provided `page.url` variable to find
 {%- endfor -%}
 </ul>
 ```
+
 {% endraw %}
 
 ## Tag Syntax
@@ -109,6 +114,7 @@ This collection would be sorted like this:
 To sort descending in your template, just use `Array.reverse()`. For example, in Nunjucks it’d look like this:
 
 {% raw %}
+
 ```
 <ul>
 {%- for post in collections.post.reverse() -%}
@@ -116,6 +122,7 @@ To sort descending in your template, just use `Array.reverse()`. For example, in
 {%- endfor -%}
 </ul>
 ```
+
 {% endraw %}
 
 ### Overriding Content Dates
@@ -130,10 +137,10 @@ date: 2016-01-01
 
 Valid `date` values:
 
-* `Last Modified`: automatically resolves to the file’s last modified date
-* `Created`: automatically resolves to the file’s created date (default, this is what is used when `date` is omitted).
-* `2016-01-01` or any other valid YAML date value
-* `"2016-01-01"` or any other valid UTC **string** that [Luxon’s `DateTime.fromISO`](https://moment.github.io/luxon/docs/manual/parsing.html#parsing-technical-formats) can parse (see also the [Luxon API docs](https://moment.github.io/luxon/docs/class/src/datetime.js~DateTime.html#static-method-fromISO)).
+- `Last Modified`: automatically resolves to the file’s last modified date
+- `Created`: automatically resolves to the file’s created date (default, this is what is used when `date` is omitted).
+- `2016-01-01` or any other valid YAML date value
+- `"2016-01-01"` or any other valid UTC **string** that [Luxon’s `DateTime.fromISO`](https://moment.github.io/luxon/docs/manual/parsing.html#parsing-technical-formats) can parse (see also the [Luxon API docs](https://moment.github.io/luxon/docs/class/src/datetime.js~DateTime.html#static-method-fromISO)).
 
 If a `date` key is omitted from the file, the date is assumed to be:
 
@@ -153,7 +160,7 @@ module.exports = function(eleventyConfig) {
   return {
     // your normal config options
     markdownTemplateEngine: "njk"
-  }
+  };
 };
 ```
 
@@ -225,7 +232,7 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addCollection("onlyMarkdown", function(collection) {
     return collection.getAllSorted().filter(function(item) {
       // Only return content that was originally a markdown file
-      let extension = item.inputPath.split('.').pop();
+      let extension = item.inputPath.split(".").pop();
       return extension === "md";
     });
   });
@@ -267,12 +274,12 @@ For example, that last `myCustomSort` collection will be available in your templ
 
 See how the `Array.sort` function above uses `a.date` and `b.date`? Similarly, any of the following items can be used for sorting and filtering the content.
 
-* `inputPath`: the path to the source input file
-* `outputPath`: the path to the output file to be written for this content
-* `url`: actual url used to link to the content on the site
-* `data`: all data for this content
-* `date`: the resolved date used for sorting
-* `templateContent`: the rendered content of this template (does _not_ include layout wrappers)
+- `inputPath`: the path to the source input file
+- `outputPath`: the path to the output file to be written for this content
+- `url`: actual url used to link to the content on the site
+- `data`: all data for this content
+- `date`: the resolved date used for sorting
+- `templateContent`: the rendered content of this template (does _not_ include layout wrappers)
 
 ```
 { inputPath: './test1.md',
